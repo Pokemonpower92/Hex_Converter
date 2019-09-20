@@ -25,21 +25,22 @@ def get_nums():
 
 def calculate(nums):
     ''' If the number is a decimal number convert it to hex,
-        othersize check if the number is a valid hex value
+        otherwise check if the number is a valid hex value
         then convert it to decimal. '''
 
-    valid = ['1', '2', '3', '4', '5', '6', '7', '8', '9',
+    valid = ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9',
              'a', 'A', 'b', 'B', 'c', 'C', 'd', 'D', 'e',
              'E', 'f', 'F']
+
     output = []
-    flag = True
     
     for num in nums:
+        flag = True
         if num[:2:] == '0x':
             # Check the digits. If they're valid turn them into decimal
             for digit in num[2::]:
                 if digit in valid:
-                    flag = True
+                    x = True
                 else:
                     flag = False
 
@@ -47,14 +48,22 @@ def calculate(nums):
                 output.append(int(num, 16))
             else:
                 output.append("Invalid number!")
-        #else:
-            # Do the conversion to hex
+        else:
+            # If the string is an int, convert it,
+            # otherwise report as invalid.
+            try:
+                output.append(hex(int(num)))
+            except ValueError:
+                output.append("Invalid number!")
             
 
     return output
-    
+
+def print_ans(nums, answers):
+    for i in range(len(nums)):
+        print(nums[i], "converts to:", answers[i])
 
 # Do the stuff
 numbers = get_nums()
 answers = calculate(numbers)
-print(answers)
+print_ans(numbers, answers)
