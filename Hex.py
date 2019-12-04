@@ -1,3 +1,4 @@
+#!usr/bin/env python
 # This program takes any number of decimal or hexidecimal numbers
 # and converts them to the opposite
 
